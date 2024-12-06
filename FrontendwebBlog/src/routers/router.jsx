@@ -4,13 +4,20 @@ import Edit from "../pages/Edit";
 import Create from "../pages/Create";
 import PostDetail from "../pages/PostDetail";
 import Register from "../pages/Register";
+import Layout from "../layout/layout";
 
 const router = createBrowserRouter([
-    { path: "/", element: <Home /> },
-    { path: "/edit/:id", element: <Edit /> },
-    { path: "/create", element: <Create /> },
-    { path: "/post/:id", element: <PostDetail /> },
-    { path: "/register", element: <Register /> },
+  {
+    path: "/",
+    element: <Layout />, // Layout component จะครอบ Children ทั้งหมด
+    children: [
+      { path: "/", element: <Home /> }, // เส้นทางสำหรับ Home
+      { path: "edit/:id", element: <Edit /> }, // เส้นทางสำหรับ Edit
+      { path: "create", element: <Create /> }, // เส้นทางสำหรับ Create
+      { path: "post/:id", element: <PostDetail /> }, // เส้นทางสำหรับ PostDetail
+      { path: "register", element: <Register /> }, // เส้นทางสำหรับ Register
+    ],
+  },
 ]);
 
 export default router;
