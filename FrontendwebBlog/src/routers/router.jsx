@@ -4,7 +4,8 @@ import Edit from "../pages/Edit";
 import Create from "../pages/Create";
 import PostDetail from "../pages/PostDetail";
 import Register from "../pages/Register";
-import Layout from "../layout/layout";
+import Layout from "../layout/Layout";
+import Login from "../pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "create", element: <Create /> }, // เส้นทางสำหรับ Create
       { path: "post/:id", element: <PostDetail /> }, // เส้นทางสำหรับ PostDetail
       { path: "register", element: <Register /> }, // เส้นทางสำหรับ Register
+      { path: "login", element: <Login /> }, // เส้นทางสำหรับ Login
     ],
   },
 ]);
