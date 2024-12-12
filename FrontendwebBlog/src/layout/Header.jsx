@@ -40,8 +40,8 @@ const header = () => {
         </ul>
       </div>
       <div className="navbar-end gap-2">
-        <a className="btn btn-outline btn-info"> login </a>
-        <a className="btn btn-info"> register </a>
+        <a className="btn btn-info"> login </a>
+        <a className="btn btn-outline btn-info"> register </a>
       </div>
     </div>
   );
