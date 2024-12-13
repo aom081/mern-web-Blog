@@ -1,6 +1,36 @@
-import React from 'react'
-
+import React, { userContext } from "react";
+import { useAuthContext } from "../context/Authcontext";
+import Swal from "sweetalert2";
 const header = () => {
+  const { user, logout } = useAuthContext();
+  const menus = [
+    {
+      link: "/create",
+      Text: "Create new post",
+    },
+  ];
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Logout",
+      text: "Are you sure you want to logout?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout!",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+        Swal.fire({
+          title: "Logout",
+          text: "You have been logged out",
+          icon: "success",
+        });
+      }
+    });
+  };
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -24,27 +54,50 @@ const header = () => {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <a href="">Create new post</a>
-            </li>
-          </ul>
+          ></ul>
         </div>
-        <a className="btn btn-ghost text-xl">SE NPRU Blog 014</a>
+        <a href="/" className="btn btn-ghost text-xl">SE NPRU Blog 014</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <a href="">Create new post</a>
-          </li>
+          {menus?.map((item, index) => {
+            return (
+              <li key={index}>
+                <a href={item.link}>{item.Text}</a>
+              </li>
+            );
+          })}
         </ul>
       </div>
-      <div className="navbar-end gap-2">
-        <a className="btn btn-info"> login </a>
-        <a className="btn btn-outline btn-info"> register </a>
-      </div>
+      {user ? (
+        <>
+          <div className="navbar-end gap-2">
+            <a className="btn btn-info" href="/create">
+              {" "}
+              Create new post{" "}
+            </a>
+            <a className="btn btn-outline btn-info" href="/logout">
+              {" "}
+              logout ({user.username}){" "}
+            </a>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="navbar-end gap-2">
+            <a className="btn btn-info" href="/login">
+              {" "}
+              login{" "}
+            </a>
+            <a className="btn btn-outline btn-info" href="/register">
+              {" "}
+              register{" "}
+            </a>
+          </div>
+        </>
+      )}
     </div>
   );
-}
+};
 
-export default header
+export default header;
