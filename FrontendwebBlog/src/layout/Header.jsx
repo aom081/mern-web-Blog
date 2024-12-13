@@ -1,14 +1,17 @@
-import React, { userContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useAuthContext } from "../context/Authcontext";
+import { useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-const header = () => {
-  const { user, logout } = useAuthContext();
-  const menus = [
-    {
-      link: "/create",
-      Text: "Create new post",
-    },
-  ];
+
+const Header = () => {
+  const [user, setUser] = useState(null);
+  const { user: savedUser, logout } = useAuthContext();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setUser(savedUser);
+  }, [savedUser]);
 
   const handleLogout = () => {
     Swal.fire({
@@ -23,19 +26,27 @@ const header = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         logout();
-        Swal.fire({
-          title: "Logout",
-          text: "You have been logged out",
-          icon: "success",
-        });
+        Swal.fire(
+          "Logged out",
+          "You have been logged out successfully.",
+          "success"
+        );
       }
     });
   };
+
+  const menus = [
+    {
+      link: "/create",
+      text: "Create new post",
+    },
+  ];
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <button tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -50,54 +61,55 @@ const header = () => {
                 d="M4 6h16M4 12h8m-8 6h16"
               />
             </svg>
-          </div>
+          </button>
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           ></ul>
         </div>
-        <a href="/" className="btn btn-ghost text-xl">SE NPRU Blog 014</a>
+        <a href="/" className="btn btn-ghost text-xl">
+          SE NPRU Blog 014
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          {menus?.map((item, index) => {
-            return (
-              <li key={index}>
-                <a href={item.link}>{item.Text}</a>
-              </li>
-            );
-          })}
+          {menus.map((item, index) => (
+            <li key={index}>
+              <a href={item.link}>{item.text}</a>
+            </li>
+          ))}
         </ul>
       </div>
-      {user ? (
-        <>
-          <div className="navbar-end gap-2">
+      <div className="navbar-end gap-2">
+        {location.pathname === "/login" || location.pathname === "/register" ? (
+          <button
+            className="btn btn-outline btn-info"
+            onClick={() => navigate("/")}
+          >
+            Go to Home
+          </button>
+        ) : user ? (
+          <>
             <a className="btn btn-info" href="/create">
-              {" "}
-              Create new post{" "}
+              Create new post
             </a>
-            <a className="btn btn-outline btn-info" href="/logout">
-              {" "}
-              logout ({user.username}){" "}
-            </a>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="navbar-end gap-2">
+            <button className="btn btn-outline btn-info" onClick={handleLogout}>
+              Logout ({user.username})
+            </button>
+          </>
+        ) : (
+          <>
             <a className="btn btn-info" href="/login">
-              {" "}
-              login{" "}
+              Login
             </a>
             <a className="btn btn-outline btn-info" href="/register">
-              {" "}
-              register{" "}
+              Register
             </a>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
 
-export default header;
+export default Header;
