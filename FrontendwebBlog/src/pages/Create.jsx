@@ -97,12 +97,17 @@ const Create = () => {
           </label>
           <input
             type="file"
+            name="file"
+            onChange={handleChange}
             className="shadow appearance-none border rounded w0full py-2 px-3 text-gray-700 leading-tight focus:out-line-none focus:shadow-outline "
             required
           />
         </div>
         <div className="flex item-center justify-between">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            onClick={handleSubmit}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
             Create Post
           </button>
         </div>
