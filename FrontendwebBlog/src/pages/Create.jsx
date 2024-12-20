@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { data, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import PostService from "../services/post.serveice";
@@ -10,7 +10,10 @@ const Create = () => {
     content: "",
     file: null,
   });
+  const [content, setContent] = useState("");
+  const editorRef = useRef(null);
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "file") {
@@ -41,6 +44,11 @@ const Create = () => {
         text: "Error",
       });
     }
+  };
+
+  const handleContentChange = (value) => {
+    setContent(value);
+    setPostDetail({ ...postDetail, content: content });
   };
 
   return (
@@ -82,11 +90,13 @@ const Create = () => {
           >
             Content
           </label>
-          <input
-            type="text"
-            className="shadow appearance-none border rounded w0full py-2 px-3 text-gray-700 leading-tight focus:out-line-none focus:shadow-outline "
-            required
-          />
+          <div className="h-64">
+            <Editor
+              value={content}
+              onChange={handleContentChange}
+              ref={editorRef}
+            ></Editor>
+          </div>
         </div>
         <div className="mb-4">
           <label

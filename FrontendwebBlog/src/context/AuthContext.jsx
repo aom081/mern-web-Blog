@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         path: "/",
         expires: new Date(Date.now() + 86400 * 1000), // Fix expires
       });
+      console.log("Update user")
     } else {
       cookies.remove("user", { path: "/" });
     }

@@ -26,4 +26,17 @@ exports.createPost = async (req, res) => {
   res.json(postDoc);
 };
 
+exports.getPost = async (req, res) => {
+  const posts = await PostModel.find()
+    .populate("author", ["username"])
+    .sort({ createdAt: -1 })
+    .limit(20);
+    //SELECT * FROM POST WHERE POST.author =USER._id
+    res.json(posts);
+};
 
+exports.getPostById = async (req, res) => {
+  const { id } = req.params;
+  const postDoc = await PostModel.findById(id).populate("author", ["username"])
+  res.json(postDoc);
+}

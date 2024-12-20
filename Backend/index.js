@@ -24,6 +24,8 @@ app.get("/", (req, res) => {
   res.send("<h1>Welcome to SE NPRU Blog</h1>");
 });
 
+app.use("/uploads", express.static(__dirname + "/uploads"));
+
 //use Pouter
 app.use("/api/v1/auth", UserRouter);
 app.use("api/v1/post", PostRouter);
