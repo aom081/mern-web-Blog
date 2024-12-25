@@ -18,10 +18,15 @@ const getPostById = async (id) => {
   return await api.get(`${API_URL}/${id}`);
 }
 
+const deleteById = async (id) => {
+  return await api.delete(`${API_URL}/${id}`);
+}
+
 const PostService = {
   createPost,
   getPosts,
   getPostById,
+  deleteById,
 };
 
 export default PostService;
