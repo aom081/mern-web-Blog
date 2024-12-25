@@ -80,3 +80,33 @@ exports.deletePost = async (req, res) => {
     res.status(500).send({ message: error.message || "delete Post error" });
   }
 };
+
+exports.updatePost = async (req, res) => {
+  const { id } = req.params;
+  if (!id) return res.status(404).json({ message: "Post not provided" });
+  const authorId = req.userId;
+  try {
+    const postDoc = await PostModel.findById(id);
+    if (authorId !== postDoc.author.toString()) {
+      res.status(403).send({ message: "You can not update post" });
+      return;
+    }
+
+    const { title, summary, content } = req.body;
+    if (!title || !summary || !content) {
+      return res.status(400).json({ message: "Please fill in all fields" });
+    }
+    postDoc.title = title;
+    postDoc.summary = summary;
+    postDoc.content = content;
+    if (req.file) {
+      const { path } = req.file;
+      postDoc.cover = path;
+    }
+    await postDoc.save();
+    res.json({ message: "Post updated successfully" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message || "update Post error" });
+  }
+};
