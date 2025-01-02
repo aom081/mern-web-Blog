@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { data, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
-import PostService from "../services/post.serveice";
+import PostService from "../services/post.service";
 import { useAuthContext } from "../context/AuthContext";
 
 const Edit = () => {

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { data, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import PostService from "../services/post.serveice";
+import PostService from "../services/post.service";
 
 const Create = () => {
   const [postDetail, setPostDetail] = useState({

@@ -4,8 +4,8 @@ import Edit from "../pages/Edit";
 import Create from "../pages/Create";
 import PostDetail from "../pages/PostDetail";
 import Register from "../pages/Register";
-import Layout from "../layout/Layout";
 import Login from "../pages/Login";
+import Layout from "../components/Layout"
 
 const router = createBrowserRouter([
   {
