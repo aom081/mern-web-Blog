@@ -66,6 +66,8 @@ const Create = () => {
           </label>
           <input
             type="text"
+            name="title"
+            value={postDetail.title}
             className="shadow appearance-none border rounded w0full py-2 px-3 text-gray-700 leading-tight focus:out-line-none focus:shadow-outline "
             required
           />
@@ -79,6 +81,8 @@ const Create = () => {
           </label>
           <input
             type="text"
+            name="summary"
+            value={postDetail.summary}
             className="shadow appearance-none border rounded w0full py-2 px-3 text-gray-700 leading-tight focus:out-line-none focus:shadow-outline "
             required
           />

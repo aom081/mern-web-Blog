@@ -19,7 +19,11 @@ const getPostById = async (id) => {
 }
 
 const deleteById = async (id) => {
-  return await api.delete(`${API_URL}/${id}`);
+  return await api.delete(`${API_URL}/${id}`, post,{
+    headers: {
+      "Content-Type": "multipart/from-data",
+      },
+  });
 }
 
 const PostService = {
