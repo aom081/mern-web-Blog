@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PostService from "../services/post.service";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../context/Authcontext";
 import { format } from "date-fns";
 
 const PostDetail = () => {

@@ -90,6 +90,12 @@ const Header = () => {
           </button>
         ) : user ? (
           <>
+            <a
+              href={`/author/${PostDetail.author._id}`}
+              className="btn btn-secondary text-white"
+            >
+              {user.username}
+            </a>
             <a className="btn btn-info" href="/create">
               Create new post
             </a>
