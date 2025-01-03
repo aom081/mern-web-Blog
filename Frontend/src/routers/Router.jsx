@@ -6,6 +6,7 @@ import PostDetail from "../pages/PostDetail";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Layout from "../components/Layout"
+import PostAuthor from "../pages/PostAuthor";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "post/:id", element: <PostDetail /> }, // เส้นทางสำหรับ PostDetail
       { path: "register", element: <Register /> }, // เส้นทางสำหรับ Register
       { path: "login", element: <Login /> }, // เส้นทางสำหรับ Login
+      { path: "author/:id", element: <PostAuthor /> }, // เส้นทางสำหรับ author
     ],
   },
 ]);

@@ -24,7 +24,7 @@ exports.createPost = async (req, res) => {
       title,
       summary,
       content,
-      cover: path,
+      cover: req.file.firebaseUrl,
       author,
     });
     res.json(postDoc);
@@ -111,5 +111,21 @@ exports.updatePost = async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message || "update Post error" });
+  }
+};
+
+exports.getPostByAuthor = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const postDoc = await PostModel.find({ author: id }).populate("author", [
+      "username",
+    ]);
+    if (!postDoc) {
+      return res.status(404).send({ message: "author not found" });
+    }
+    res.json(postDoc);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message || "Internal server error" });
   }
 };

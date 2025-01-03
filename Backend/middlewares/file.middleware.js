@@ -47,10 +47,11 @@ function checkFileType(file, cb) {
 
 async function uploadToFirebase(req, res, next) {
   if (!req.file) {
-    return res.status(400).json({ msg: "No Image uploaded" });
+    next();
+    return;
   }
   //save location
-  const storageRef = ref(firebaseStorage, `upload/${req.file.originalname}`);
+  const storageRef = ref(firebaseStorage, `upload/${req?.file?.buffer?.originalname}`);
   //file type
   const metadata = {
     contentType: req.file.mimetype,

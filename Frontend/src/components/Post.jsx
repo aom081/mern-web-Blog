@@ -1,5 +1,4 @@
 import React from "react";
-const baseURL = import.meta.env.VITE_PIC_URL;
 
 const Post = ({ title, author, summary, cover, createAt }) => {
   return (
@@ -9,7 +8,7 @@ const Post = ({ title, author, summary, cover, createAt }) => {
           <a href={"/post/" + id} className="้href">
             <img
               className="w-full h-64 object-cover "
-              src={`${baseURL}/${cover}`}
+              src={`${cover}`}
               alt={title}
             />
           </a>

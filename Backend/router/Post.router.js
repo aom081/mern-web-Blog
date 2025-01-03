@@ -14,4 +14,6 @@ router.get("/:id", postController.getPostById);
 router.delete("/:id", authJwt.verifyToken, postController.getPostById);
 //http://localhost:5000/api/v1/post/id
 router.put("/:id", authJwt.verifyToken, upload, postController.updatePost);
+//http://localhost:5000/api/v1/author/id
+router.get("/author/:id", postController.getPostByAuthor);
 module.exports = router;

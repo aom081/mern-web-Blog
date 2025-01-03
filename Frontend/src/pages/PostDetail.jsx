@@ -49,6 +49,7 @@ const PostDetail = () => {
       }
     });
   };
+
   return (
     <div>
       {PostDetail ? (
@@ -64,7 +65,7 @@ const PostDetail = () => {
             </time>
             <div className="author mb-2">
               <span className="text-blue-500">
-                @{PostDetail.author.username}
+                @<a href={`/author/${PostDetail.author._id}`}>{PostDetail.author.username}</a>
               </span>
             </div>
           </div>
