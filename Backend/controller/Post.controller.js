@@ -9,7 +9,10 @@ exports.createPost = async (req, res) => {
     return res.status(401).json({ message: "Token missing" });
   }
   //File upload
-  const { path } = req.file;
+  if (!req.file) {
+    return res.status(400).json({ message: "No Image uploaded" });
+  }
+  const { path } = req.file.firebaseUrl;
   const author = req.userId;
   const { title, summary, content } = req.body;
   if (!title || !summary || !content) {
